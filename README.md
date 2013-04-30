@@ -1,4 +1,4 @@
-xinit script to run slideshow using libreoffice in kiosk style
+xsession script to run slideshow using libreoffice in kiosk style
 
 0.1 Release
 
