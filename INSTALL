@@ -1,0 +1,33 @@
+Installation instructions for running Raspberry Pi slideshow
+
+Install latest Raspbian OS to SD card and boot pi
+
+Install following applications:
+
+matchbox window manager - light weight window manager
+sudo apt-get install matchbox
+
+rsync - file synchronisation application
+sudo apt-get install rsync
+
+libreoffice - office suite including presentation application
+sudo apt-get install libreoffice
+
+Copy .xsession to /home/pi - assuming this is the user id setup to run on bootup
+This script starts the display manager and syncs the default user home with a fresh copy
+from /opt - it also deletes any previous libreoffice config allowing clean start of slideshow
+
+Create a copy of the default user (pi) in /opt
+
+cp -r /home/pi /opt/
+cd /opt/pi/
+chmod -R a+r .
+chmod a+x .xsession
+
+Create a slidshow named slideshow.odp and copy to /opt/pi - this will autostart on bootup
+
+Restart the pi and stand back and enjoy your show 
+
+Thanks to Alan Moore for inspiration from his blog
+http://www.alandmoore.com/blog/2011/11/05/creating-a-kiosk-with-linux-and-x11-2011-edition/
+
