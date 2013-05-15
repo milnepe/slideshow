@@ -2,6 +2,10 @@ Installation instructions for running Raspberry Pi slideshow
 
 Install latest Raspbian OS to SD card and boot pi
 
+Update aptitude sources
+
+sudo apt-get update
+
 Install following applications:
 
 matchbox window manager - light weight window manager
