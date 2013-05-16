@@ -23,10 +23,10 @@ from /opt - it also deletes any previous libreoffice config allowing clean start
 
 Create a copy of the default user (pi) in /opt
 
-cp -r /home/pi /opt/
+sudo cp -r /home/pi /opt/
 cd /opt/pi/
-chmod -R a+r .
-chmod a+x .xsession
+sudo chmod -R a+r .
+sudo chmod a+x .xsession
 
 Create a slidshow named slideshow.odp and copy to /opt/pi - this will autostart on bootup
 
