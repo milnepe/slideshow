@@ -1,36 +1,65 @@
-Installation instructions for running Raspberry Pi slideshow
+Installation instructions for running slideshow on Debian 11 XFCE
 
-Install latest Raspbian OS to SD card and boot pi
+Install latest Debian and boot device
 
 Update packages
-sudo apt-get update
-sudo apt-get upgrade
+sudo apt update
+sudo apt upgrade
 
-Install following applications:
+Install the following applications:
 
 matchbox window manager - light weight window manager
-sudo apt-get install matchbox
+sudo apt install matchbox
 
 rsync - file synchronisation application
-sudo apt-get install rsync
+sudo apt install rsync
 
 libreoffice - office suite including presentation application
-sudo apt-get install libreoffice
+sudo apt install libreoffice
 
-Copy .xsession to /home/pi - assuming this is the user id setup to run on bootup
-This script starts the display manager and syncs the default user home with a fresh copy
-from /opt - it also deletes any previous libreoffice config allowing clean start of slideshow
+Edit lightdm configuration to set auto login by editing /etc/lightdm/lightdm.conf
+under the [Seat:*] section.
+In this example the default user is rock:
+[Seat:*]
+...
+#session-cleanup-script=                                                        
+autologin-guest=false                                                           
+autologin-user=rock                                                             
+autologin-user-timeout=0                                                        
+#autologin-in-background=false
 
-Create a copy of the default user (pi) in /opt
+Setup auto mount for USB drive
+Obtain UUID for your drive by plugging it in and running:
+sudo blkid
 
-sudo cp -r /home/pi /opt/
-cd /opt/pi/
-sudo chmod -R a+r .
-sudo chmod a+x .xsession
+Then add an entry into /etc/fstab for example:
+UUID=ABCD-1234  /mnt/usbdrive  vfat  noauto,nofail,x-systemd.automount,x-systemd.idle-timeout=2,x-systemd.device-timeout=2
 
-Create a slidshow named slideshow.odp and copy to /opt/pi - this will autostart on bootup
+noauto - No mount with mount -a
+nofail - Continue booting even mount point fails
+x-systemd.automount - Automount this UUID
+x-systemd.idle-timeout=2 - Wait 2 seconds before unmounting
+x-systemd.device-timeout=2 - Timeout after 2 seconds
 
-Restart the pi and stand back and enjoy your show 
+
+Copy .xsession to /home/${USER} - This script starts the display manager and syncs the default
+users home with a fresh copy from /opt/${USER} - this is what stops anyone breaking in.
+
+Create a copy of the default user ${USER} in /opt
+sudo cp -r /home/${USER} /opt/
+
+Create a directory in the root of your USB drive named slideshow - this must contain an odp format
+file called slideshow.odp and any audio / video files that are embeded in it. This whole dir is
+coppied to the users home on startup 
+
+Restart your device and stand back and enjoy your show
+
+
+Note
+The slideshow starts on boot and enters a loop so no one can break in. If you need to access the filesystem
+the easiest way is to make sure the serial console is enabled and do it via that.
+
+The system is not designed to be attached to the network in this configuration due to the auto login.
 
 Thanks to Alan Moore for inspiration from his blog
 http://www.alandmoore.com/blog/2011/11/05/creating-a-kiosk-with-linux-and-x11-2011-edition/
