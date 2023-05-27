@@ -14,6 +14,9 @@ matchbox-window-manager &
 while true; do
 	# refresh home dir
 	rsync -qr --delete --exclude='.Xauthority' /opt/${USER}/ $HOME/
+	# copy slideshow dir from usb drive - this must contain the slideshow.odp
+	# and any embedded audio / video media files
+	cp -r /mnt/usbdrive/slideshow .
 	# run libreoffice in kiosk mode
-	soffice --norestore -show slideshow.odp 
+	soffice --norestore -show slideshow/slideshow.odp 
 done
