@@ -49,14 +49,17 @@ Create a copy of the default user ${USER} in /opt
 sudo cp -r /home/${USER} /opt/
 
 Create a directory in the root of your USB drive named slideshow - this must contain an odp format
-file called slideshow.odp and any audio / video files that are embeded in it. This whole dir is
-coppied to the users home on startup 
+file called slideshow.odp and any audio / video files that are embedded in it. This whole dir is
+copied to the users home on startup 
 
-Restart your device and stand back and enjoy your show
+Restart your device and the first time Libroffice runs you need to clear the hints dialogue and close
+Libreoffice.
+
+Now stand back and enjoy your show!
 
 
 Note
-The slideshow starts on boot and enters a loop so no one can break in. If you need to access the filesystem
+The slideshow starts on boot and enters a loop so no one can break in. If you need to access the file system
 the easiest way is to make sure the serial console is enabled and do it via that.
 
 The system is not designed to be attached to the network in this configuration due to the auto login.
