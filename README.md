@@ -1,6 +1,6 @@
 xsession script to run slideshow using libreoffice in kiosk style
 
-0.1 Release
+0.2 Release
 
 Copywrite 2013 Peter Milne
 
